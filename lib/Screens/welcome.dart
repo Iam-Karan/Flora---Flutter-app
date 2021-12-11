@@ -44,8 +44,8 @@ class _WelcomeState extends State<Welcome> {
                 top: 0,
                 bottom: 0,
                 right: 0,
-                child: Image.network(
-                  'https://images.pexels.com/photos/1172849/pexels-photo-1172849.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                child: Image.asset(
+                  'assets/images/welcome1.jpeg',
                   fit: BoxFit.fill,
                 ),
               ),
@@ -55,16 +55,16 @@ class _WelcomeState extends State<Welcome> {
                   style: kwelcomeLabel,
                 ),
               ),
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Image.network(
-                  "https://cdn-icons-png.flaticon.com/512/2890/2890930.png",
-                  fit: BoxFit.fill,
-                  height: 250,
-                  width: 250,
-                ),
-              ),
+              // Positioned(
+              //   top: 0,
+              //   left: 0,
+              //   child: Image.network(
+              //     "https://cdn-icons-png.flaticon.com/512/2890/2890930.png",
+              //     fit: BoxFit.fill,
+              //     height: 250,
+              //     width: 250,
+              //   ),
+              // ),
               Positioned(
                 bottom: 150.0,
                 left: 20.0,

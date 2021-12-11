@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Screens/Home/home.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Login/signup.dart';
 import 'Screens/welcome.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Welcome(),
         '/login': (context) => Login(),
         '/signup': (context) => Signup(),
+        '/home': (context) => Home(),
       },
     );
   }
