@@ -52,8 +52,8 @@ class _LoginState extends State<Login> {
             Positioned(
               top: 200,
               left: 130,
-              child: Image.network(
-                kbackImage,
+              child: Image.asset(
+                'assets/images/login.png',
                 fit: BoxFit.fill,
                 height: 250,
                 width: 250,

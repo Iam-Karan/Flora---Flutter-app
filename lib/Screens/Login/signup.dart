@@ -59,8 +59,8 @@ class _SignupState extends State<Signup> {
             Positioned(
               top: 200,
               left: 130,
-              child: Image.network(
-                ksignLogo,
+              child: Image.asset(
+                'assets/images/login.png',
                 fit: BoxFit.fill,
                 height: 250,
                 width: 250,
