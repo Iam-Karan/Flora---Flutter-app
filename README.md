@@ -1,6 +1,12 @@
 # flora
 
+
+
 A new Flutter project.
+
+step-1 : Download the project.
+step-2: go to terminal and write ->  flutter pub get
+Done
 
 ## Getting Started
 
