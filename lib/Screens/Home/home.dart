@@ -1,3 +1,4 @@
+import 'package:fauna/Model/cart.dart';
 import 'package:fauna/Screens/Categories/favorite.dart';
 import 'package:fauna/Screens/Categories/flowers.dart';
 import 'package:fauna/Screens/Categories/gifts.dart';
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
             animationDuration: Duration(milliseconds: 300),
             animationType: BadgeAnimationType.slide,
             badgeContent: Text(
-              '0',
+              '${demoCarts.length}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,

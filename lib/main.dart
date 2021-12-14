@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:fauna/Screens/Categories/gifts.dart';
+import 'package:fauna/Screens/Details/shipping_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Screens/Categories/favorite.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/flower': (context) => Flowers(),
         '/favorite': (context) => Favorite(),
         '/cart': (context) => CartScreen(),
+        '/shipping': (context) => Shipping(),
       },
     );
   }
