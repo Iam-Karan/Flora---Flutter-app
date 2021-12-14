@@ -1,4 +1,5 @@
 import 'package:fauna/Model/item.dart';
+import 'package:fauna/Screens/Details/product_details.dart';
 
 // import 'package:fauna/Screens/details/product_details.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +28,14 @@ class _FlowersState extends State<Flowers> {
         itemBuilder: (context, index) => FlowerCard(
           item: items[index],
           press: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => DetailsScreen(
-            //       item: items[index],
-            //     ),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsScreen(
+                  item: items[index],
+                ),
+              ),
+            );
           },
         ),
       ),
