@@ -1,5 +1,5 @@
 import 'package:fauna/Model/item.dart';
-// import 'package:fauna/Model/cart.dart';
+import 'package:fauna/Model/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,13 +22,13 @@ class BodyOfDetailScreen extends StatefulWidget {
 }
 
 class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
-  // void addToCart() {
-  //   print("Added");
-  //   demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
-  //   setState(() {
-  //     txtQuntity = 1;
-  //   });
-  // }
+  void addToCart() {
+    print("Added");
+    demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
+    setState(() {
+      txtQuntity = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +182,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {},
+                          onPressed: addToCart,
                           child: Text(
                             "Add to cart",
                             style: kbuttonLabel,

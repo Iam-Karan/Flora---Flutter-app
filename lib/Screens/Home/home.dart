@@ -59,7 +59,9 @@ class _HomeState extends State<Home> {
           IconButton(
             iconSize: 30.0,
             color: Colors.red,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
             icon: const Icon(Icons.search),
           ),
           Badge(

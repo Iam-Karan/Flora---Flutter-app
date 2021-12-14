@@ -1,9 +1,13 @@
 import 'dart:developer';
+import 'package:fauna/Screens/Categories/gifts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'Screens/Categories/favorite.dart';
+import 'Screens/Categories/flowers.dart';
 import 'Screens/Home/home.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Login/signup.dart';
+import 'Screens/Orders/cart.dart';
 import 'Screens/welcome.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -44,6 +48,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/signup': (context) => Signup(),
         '/home': (context) => Home(),
+        '/gift': (context) => Gifts(),
+        '/flower': (context) => Flowers(),
+        '/favorite': (context) => Favorite(),
+        '/cart': (context) => CartScreen(),
       },
     );
   }
