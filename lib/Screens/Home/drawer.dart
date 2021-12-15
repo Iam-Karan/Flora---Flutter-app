@@ -55,12 +55,7 @@ class _DraWerState extends State<DraWer> {
             leading: Icon(Icons.shopping_cart),
             title: Text('Orders'),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => Order(),
-              //   ),
-              // );
+              Navigator.pushNamed(context, '/order');
             },
           ),
         ],

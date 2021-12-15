@@ -1,4 +1,4 @@
-// import 'package:fauna/Screens/Orders/gift_pack.dart';
+import 'package:fauna/Screens/Orders/gift_pack.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -200,16 +200,16 @@ class _ShippingState extends State<Shipping> {
                           minWidth: double.infinity,
                           height: 50,
                           onPressed: () {
-                            // if (checkWrap == true) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => GiftPack(),
-                            //     ),
-                            //   );
-                            // } else {
-                            //   Navigator.pushNamed(context, '/order');
-                            // }
+                            if (checkWrap == true) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GiftPack(),
+                                ),
+                              );
+                            } else {
+                              Navigator.pushNamed(context, '/order');
+                            }
                           },
                           child: Text(
                             "Order",
