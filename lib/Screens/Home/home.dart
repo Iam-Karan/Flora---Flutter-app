@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.filter_vintage,
               color: Colors.red,
               size: 40,
             ),
