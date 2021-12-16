@@ -141,7 +141,7 @@ class _SignupState extends State<Signup> {
                               style: TextStyle(fontSize: 20.0),
                             ),
                             onTap: () {
-                              Navigator.pushNamed(context, '/login');
+                              Navigator.pop(context);
                             }),
                       ],
                     ),

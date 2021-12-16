@@ -1,4 +1,6 @@
 // import 'dart:async';
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,39 +24,43 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  // void initState() {
-  //   super.initState();
-  //   Timer(
-  //       Duration(seconds: 60),
-  //       () => Navigator.of(context).pushReplacement(
-  //           MaterialPageRoute(builder: (BuildContext context) => Login())));
-  // }
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 30), () => Navigator.pushNamed(context, '/home'));
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           height: size.height,
           width: double.infinity,
           child: Stack(
             children: <Widget>[
-              Positioned(
-                top: 0,
-                bottom: 0,
-                right: 0,
-                child: Image.asset(
-                  'assets/images/welcome1.jpeg',
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Center(
+              Container(
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 150, left: 160, right: 150),
                 child: Text(
                   "Welcome",
                   style: kwelcomeLabel,
                 ),
               ),
+
+              Container(
+                margin: EdgeInsets.only(top: 250, left: 10, right: 10),
+                width: double.infinity,
+                height: 300.0,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/welcome1.png',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+
               // Positioned(
               //   top: 0,
               //   left: 0,

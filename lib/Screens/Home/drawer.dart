@@ -1,3 +1,4 @@
+import 'package:fauna/Screens/Details/user_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -43,12 +44,12 @@ class _DraWerState extends State<DraWer> {
             leading: Icon(Icons.perm_identity),
             title: Text('User'),
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => User(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => User(),
+                ),
+              );
             },
           ),
           ListTile(
