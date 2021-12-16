@@ -76,7 +76,7 @@ class _SignupState extends State<Signup> {
                       children: <Widget>[
                         Form(
                           key: formkey,
-                          autovalidate: true,
+                          autovalidateMode: AutovalidateMode.always,
                           child: Column(
                             children: [
                               TextFormField(

@@ -62,7 +62,7 @@ class _UserState extends State<User> {
                   Container(
                     child: Form(
                       key: formkey,
-                      autovalidate: true,
+                      autovalidateMode: AutovalidateMode.always,
                       child: Column(
                         children: [
                           TextFormField(
