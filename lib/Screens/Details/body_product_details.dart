@@ -1,3 +1,4 @@
+import 'package:fauna/Model/favorite_model.dart';
 import 'package:fauna/Model/item.dart';
 import 'package:fauna/Model/cart.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,19 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
     setState(() {
       txtQuntity = 1;
     });
+  }
+
+  void addToFavorite() {
+    print("Added to the favorite");
+    favoriteCart.add(FavoriteCart(item: widget.item));
+    setState(() {
+      txtQuntity = 1;
+    });
+  }
+
+  void removeFromFavorite() {
+    print("Removed from the favorite");
+    favoriteCart.removeAt(0);
   }
 
   @override
@@ -88,9 +102,13 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                           child: IconButton(
                             onPressed: () {
                               setState(() {
-                                bgcolor == Colors.white
-                                    ? bgcolor = Colors.red
-                                    : bgcolor = Colors.white;
+                                if (bgcolor == Colors.white) {
+                                  bgcolor = Colors.red;
+                                  addToFavorite();
+                                } else {
+                                  bgcolor = Colors.white;
+                                  removeFromFavorite();
+                                }
                               });
                             },
                             icon: Icon(
