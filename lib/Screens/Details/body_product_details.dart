@@ -72,9 +72,16 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 50.0),
+                  margin: EdgeInsets.only(top: 0.0),
                   child: Column(
                     children: [
+                      Container(
+                        child: Icon(
+                          Icons.remove,
+                          size: 40.0,
+                          color: Colors.black,
+                        ),
+                      ),
                       Container(
                         margin: EdgeInsets.only(left: 20.0),
                         width: double.infinity,

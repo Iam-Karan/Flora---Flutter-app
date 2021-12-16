@@ -59,6 +59,13 @@ class _DraWerState extends State<DraWer> {
               Navigator.pushNamed(context, '/order');
             },
           ),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Customize flower'),
+            onTap: () {
+              Navigator.pushNamed(context, '/customflower');
+            },
+          ),
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Screens/Categories/favorite.dart';
 import 'Screens/Categories/flowers.dart';
+import 'Screens/Custom/custom_flower.dart';
 import 'Screens/Home/home.dart';
 import 'Screens/Login/login.dart';
 import 'Screens/Login/signup.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/cart': (context) => CartScreen(),
         '/shipping': (context) => Shipping(),
         '/order': (context) => Order(),
+        '/customflower': (context) => CustomFlower(),
       },
     );
   }

@@ -95,6 +95,16 @@ class _UserState extends State<User> {
                             ),
                             validator: validatePassword,
                           ),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Allergie?? Yes or no",
+                            ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "must be required"),
+                            ]),
+                          ),
                         ],
                       ),
                     ),
