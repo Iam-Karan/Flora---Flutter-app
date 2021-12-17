@@ -7,11 +7,11 @@ import 'drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:badges/badges.dart';
 
-const bottomLabel =
-    TextStyle(color: Colors.red, fontSize: 15.0, fontFamily: 'Satisfy');
-
 const TextStyle optionStyle =
     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+const Color activeColor = Colors.red;
+const Color inactiveColor = Colors.black38;
 const List<Widget> _widgetOptions = <Widget>[
   Gifts(),
   Flowers(),
@@ -57,17 +57,9 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          IconButton(
-            iconSize: 30.0,
-            color: Colors.red,
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-            icon: const Icon(Icons.search),
-          ),
           Badge(
             position: BadgePosition.topEnd(top: 3, end: 18),
-            animationDuration: Duration(milliseconds: 300),
+            animationDuration: Duration(milliseconds: 100),
             animationType: BadgeAnimationType.slide,
             badgeContent: Text(
               '${demoCarts.length}',
@@ -89,40 +81,32 @@ class _HomeState extends State<Home> {
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
+        selectedLabelStyle: TextStyle(
+            color: activeColor, fontSize: 15.0, fontFamily: 'Satisfy'),
+        selectedIconTheme: IconThemeData(color: activeColor),
+        unselectedLabelStyle: TextStyle(
+            color: inactiveColor, fontSize: 15.0, fontFamily: 'Satisfy'),
+        unselectedIconTheme: IconThemeData(color: inactiveColor),
+        elevation: 0,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.card_giftcard,
-              color: Colors.red,
-              size: 40,
-            ),
-            title: Text(
-              "Gifts",
-              style: bottomLabel,
-            ),
-          ),
+              icon: Icon(
+                Icons.card_giftcard,
+                size: 40,
+              ),
+              label: 'Gift'),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.filter_vintage,
-              color: Colors.red,
-              size: 40,
-            ),
-            title: Text(
-              "Flower",
-              style: bottomLabel,
-            ),
-          ),
+              icon: Icon(
+                Icons.filter_vintage,
+                size: 40,
+              ),
+              label: 'Flower'),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-              color: Colors.red,
-              size: 40,
-            ),
-            title: Text(
-              "Favorite",
-              style: bottomLabel,
-            ),
-          ),
+              icon: Icon(
+                Icons.favorite,
+                size: 40,
+              ),
+              label: 'Favorite'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,

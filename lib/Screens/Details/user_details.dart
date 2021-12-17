@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 const kbuttonLabel = TextStyle(
@@ -40,102 +41,113 @@ class _UserState extends State<User> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
-              child: SizedBox(
-                width: size.width,
-                height: 250.0,
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.network(
-                      "https://cdn-icons-png.flaticon.com/512/64/64572.png"),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.red,
+          elevation: 0,
+          title: Text(
+            "User Profile",
+            style: GoogleFonts.ubuntu(),
+          ),
+        ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 50, 0, 10),
+                child: SizedBox(
+                  width: size.width,
+                  height: 250.0,
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Image.network(
+                        "https://cdn-icons-png.flaticon.com/512/64/64572.png"),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(20.0, 50.0, 20, 0),
-              child: Column(
-                children: [
-                  Container(
-                    child: Form(
-                      key: formkey,
-                      autovalidateMode: AutovalidateMode.always,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "First Name",
+              Container(
+                margin: EdgeInsets.fromLTRB(20.0, 50.0, 20, 0),
+                child: Column(
+                  children: [
+                    Container(
+                      child: Form(
+                        key: formkey,
+                        autovalidateMode: AutovalidateMode.always,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "First Name",
+                              ),
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: "Name must be required"),
+                              ]),
                             ),
-                            validator: MultiValidator([
-                              RequiredValidator(
-                                  errorText: "Name must be required"),
-                            ]),
-                          ),
-                          SizedBox(height: 10.0),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Email",
+                            SizedBox(height: 10.0),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Email",
+                              ),
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: "Email must be required"),
+                                EmailValidator(errorText: "Not a valid email"),
+                              ]),
                             ),
-                            validator: MultiValidator([
-                              RequiredValidator(
-                                  errorText: "Email must be required"),
-                              EmailValidator(errorText: "Not a valid email"),
-                            ]),
-                          ),
-                          SizedBox(height: 20.0),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Password",
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Password",
+                              ),
+                              validator: validatePassword,
                             ),
-                            validator: validatePassword,
-                          ),
-                          SizedBox(height: 20.0),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Allergie?? Yes or no",
+                            SizedBox(height: 20.0),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: "Allergie?? Yes or no",
+                              ),
+                              validator: MultiValidator([
+                                RequiredValidator(errorText: "must be required"),
+                              ]),
                             ),
-                            validator: MultiValidator([
-                              RequiredValidator(errorText: "must be required"),
-                            ]),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 100.0),
-                  MaterialButton(
-                    height: 60.0,
-                    minWidth: double.infinity,
-                    color: Colors.deepOrange,
-                    onPressed: () {
-                      if (formkey.currentState!.validate()) {
-                        print("validated");
-                        Navigator.pushNamed(context, '/home');
-                      } else {
-                        print("Not validated");
-                      }
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
+                    SizedBox(height: 100.0),
+                    MaterialButton(
+                      height: 60.0,
+                      minWidth: double.infinity,
+                      color: Colors.deepOrange,
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          print("validated");
+                          Navigator.pushNamed(context, '/home');
+                        } else {
+                          print("Not validated");
+                        }
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Text(
+                        "Update",
+                        style: kbuttonLabel,
+                      ),
                     ),
-                    child: Text(
-                      "Update",
-                      style: kbuttonLabel,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

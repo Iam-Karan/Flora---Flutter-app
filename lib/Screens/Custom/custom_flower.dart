@@ -1,7 +1,7 @@
 import 'package:fauna/Model/favorite_model.dart';
 import 'package:fauna/Model/item.dart';
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'custom_flower_card.dart';
 // import 'favorite_card.dart';
 
@@ -17,7 +17,13 @@ class _CustomFlowerState extends State<CustomFlower> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Customize your flower"),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.red,
+        elevation: 0,
+        title: Text(
+          "Customize Bouquet",
+          style: GoogleFonts.ubuntu(),
+        ),
       ),
       body: Container(
         color: Colors.white,
