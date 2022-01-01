@@ -1,6 +1,8 @@
+import 'package:fauna/Screens/Services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:provider/provider.dart';
 
 //Design code
 const kbuttonLabel = TextStyle(
@@ -32,8 +34,6 @@ String? validatePassword(value) {
   }
 }
 
-GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
 
@@ -42,8 +42,13 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    String error = "";
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -91,6 +96,7 @@ class _SignupState extends State<Signup> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Email",
@@ -104,6 +110,7 @@ class _SignupState extends State<Signup> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: passwordController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Password",
@@ -118,10 +125,21 @@ class _SignupState extends State<Signup> {
                           height: 60.0,
                           minWidth: double.infinity,
                           color: Colors.red,
-                          onPressed: () {
+                          onPressed: () async {
                             if (formkey.currentState!.validate()) {
                               print("validated");
-                              Navigator.pushNamed(context, '/home');
+                              dynamic result = await authService
+                                  .createUserWithEmailAndPassword(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                              if (result == null) {
+                                setState(() {
+                                  error =
+                                      "Please enter valid email or password";
+                                });
+                              } else {
+                                Navigator.pushNamed(context, '/home');
+                              }
                             } else {
                               print("Not validated");
                             }

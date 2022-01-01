@@ -1,30 +1,11 @@
+import 'package:fauna/Screens/Services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './Design/login_design.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 //declaration
-GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-void validate() {
-  if (formkey.currentState!.validate()) {
-    print("validated");
-  } else {
-    print("Not validated");
-  }
-}
-
-String? validatePassword(value) {
-  if (value.isEmpty) {
-    return "Password is required";
-  } else if (value.length < 6) {
-    return "Password shoulb be atleast 6 charcaters";
-  } else if (value.length > 15) {
-    return "Password shoulb not be more than 15 charcaters";
-  } else {
-    return null;
-  }
-}
 
 //main code
 class Login extends StatefulWidget {
@@ -35,9 +16,35 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final authService = Provider.of<AuthService>(context);
+    void validate() {
+      if (formkey.currentState!.validate()) {
+        print("validated");
+      } else {
+        print("Not validated");
+      }
+    }
+
+    String? validatePassword(value) {
+      if (value.isEmpty) {
+        return "Password is required";
+      } else if (value.length < 6) {
+        return "Password shoulb be atleast 6 charcaters";
+      } else if (value.length > 15) {
+        return "Password shoulb not be more than 15 charcaters";
+      } else {
+        return null;
+      }
+    }
+
+    String error = "error";
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -74,6 +81,7 @@ class _LoginState extends State<Login> {
                           child: Column(
                             children: [
                               TextFormField(
+                                controller: emailController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Email",
@@ -87,6 +95,7 @@ class _LoginState extends State<Login> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: passwordController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Password",
@@ -101,10 +110,19 @@ class _LoginState extends State<Login> {
                           color: Colors.red,
                           height: 60.0,
                           minWidth: double.infinity,
-                          onPressed: () {
+                          onPressed: () async {
                             if (formkey.currentState!.validate()) {
                               print("validated");
-                              Navigator.pushNamed(context, '/home');
+                              dynamic result =
+                                  await authService.signInWithEmailAndPasswod(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                              if (result == null) {
+                                setState(() => error =
+                                    "Could not sigin with those credential");
+                              } else {
+                                Navigator.pushNamed(context, '/home');
+                              }
                             } else {
                               print("Not validated");
                             }

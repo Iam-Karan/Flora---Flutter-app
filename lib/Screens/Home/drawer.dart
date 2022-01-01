@@ -1,6 +1,9 @@
+import 'package:fauna/Model/user.dart';
 import 'package:fauna/Screens/Details/user_details.dart';
+import 'package:fauna/Screens/Services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DraWer extends StatefulWidget {
   const DraWer({Key? key}) : super(key: key);
@@ -10,8 +13,10 @@ class DraWer extends StatefulWidget {
 }
 
 class _DraWerState extends State<DraWer> {
+  UserAttributes? userAttributes;
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Drawer(
       child: ListView(
         children: [
@@ -23,7 +28,7 @@ class _DraWerState extends State<DraWer> {
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/wrapper');
                   },
                   icon: Icon(
                     Icons.perm_identity,
@@ -32,8 +37,19 @@ class _DraWerState extends State<DraWer> {
                   ),
                 ),
                 Text(
-                  "Nisarg Patel",
+                  "user",
                   style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await authService.signOut();
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  icon: Icon(
+                    Icons.logout,
+                    size: 20.0,
                     color: Colors.white,
                   ),
                 ),
