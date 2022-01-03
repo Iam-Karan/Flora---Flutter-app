@@ -2,9 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fauna/Model/addUser.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:fauna/Model/user.dart";
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+AccessToken? _accessToken;
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   UserAttributes? _userFromFirebase(User? user) {
     if (user == null) {
       return null;
@@ -14,6 +18,22 @@ class AuthService {
 
   Stream<UserAttributes?>? get user {
     return _auth.authStateChanges().map(_userFromFirebase);
+  }
+
+  //LoginWithFacebook
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult =
+        await FacebookAuth.instance.login(permissions: ['email']);
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    final userData = await FacebookAuth.instance.getUserData();
+    String userEmail = userData['email'];
+    final credential = await _auth.signInWithCredential(facebookAuthCredential);
+    print(userEmail.toString());
+
+    return credential;
   }
 
   //Login

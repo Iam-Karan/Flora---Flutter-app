@@ -136,6 +136,22 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         SizedBox(height: 10.0),
+                        MaterialButton(
+                          onPressed: () async {
+                            authService.signInWithFacebook();
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          color: Colors.blueAccent,
+                          height: 60.0,
+                          minWidth: double.infinity,
+                          child: Text(
+                            "Faccebook Login",
+                            style: kbuttonLabel,
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
                         InkWell(
                             child: new Text(
                               'New user?',
