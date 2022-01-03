@@ -14,9 +14,12 @@ const kbuttonLabel = TextStyle(
 );
 
 class BodyOfDetailScreen extends StatefulWidget {
-  final Item item;
+  final FlowerItem flowerItem;
+  final Color colorcode;
 
-  const BodyOfDetailScreen({Key? key, required this.item}) : super(key: key);
+  const BodyOfDetailScreen(
+      {Key? key, required this.flowerItem, required this.colorcode})
+      : super(key: key);
 
   @override
   _BodyOfDetailScreenState createState() => _BodyOfDetailScreenState();
@@ -25,7 +28,7 @@ class BodyOfDetailScreen extends StatefulWidget {
 class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
   void addToCart() {
     print("Added");
-    demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
+    // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
     setState(() {
       txtQuntity = 1;
     });
@@ -33,7 +36,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
 
   void addToFavorite() {
     print("Added to the favorite");
-    favoriteCart.add(FavoriteCart(item: widget.item));
+    // favoriteCart.add(FavoriteCart(item: widget.item));
     setState(() {
       txtQuntity = 1;
     });
@@ -55,7 +58,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
             height: 250.0,
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.asset(widget.item.image),
+              child: Image.network(widget.flowerItem.image.toString()),
             ),
           ),
           Container(
@@ -86,7 +89,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                         margin: EdgeInsets.only(left: 20.0),
                         width: double.infinity,
                         child: Text(
-                          widget.item.title,
+                          widget.flowerItem.title.toString(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 24.0,
@@ -132,7 +135,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                         height: 100.0,
                         // color: Colors.grey,
                         child: Text(
-                          widget.item.description,
+                          widget.flowerItem.description.toString(),
                           style: GoogleFonts.ubuntu(
                             fontSize: 20.0,
                             color: Colors.black,
@@ -145,7 +148,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                         height: 50.0,
                         // color: Colors.grey,
                         child: Text(
-                          "Price : \$ ${widget.item.price}",
+                          "Price : \$ ${widget.flowerItem.price}",
                           style: GoogleFonts.ubuntu(
                             fontSize: 22.0,
                             color: Colors.black,
@@ -165,7 +168,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                               });
                             },
                             elevation: 2.0,
-                            fillColor: widget.item.color,
+                            fillColor: widget.colorcode,
                             child: Icon(
                               Icons.remove,
                               size: 35.0,
@@ -189,7 +192,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                               });
                             },
                             elevation: 2.0,
-                            fillColor: widget.item.color,
+                            fillColor: widget.colorcode,
                             child: Icon(
                               Icons.add,
                               size: 35.0,
@@ -201,7 +204,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                         ],
                       ),
                       Container(
-                        color: widget.item.color,
+                        color: widget.colorcode,
                         margin:
                             EdgeInsets.only(left: 20.0, top: 30.0, right: 20.0),
                         child: MaterialButton(

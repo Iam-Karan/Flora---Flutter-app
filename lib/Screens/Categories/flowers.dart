@@ -14,6 +14,24 @@ class Flowers extends StatefulWidget {
 }
 
 class _FlowersState extends State<Flowers> {
+  List<FlowerItem> flowerItems = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchFlowersData();
+  }
+
+  fetchFlowersData() async {
+    dynamic result = await DatabaseManager().getItemList();
+    if (result == null) {
+      print("flower list null");
+    } else {
+      setState(() {
+        flowerItems = result;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -21,17 +39,11 @@ class _FlowersState extends State<Flowers> {
         children: [
           OutlineSearchBar(
             margin: EdgeInsets.all(15.0),
-            hintStyle: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black
-            ),
+            hintStyle: TextStyle(fontSize: 16.0, color: Colors.black),
             hintText: 'search',
             borderColor: Colors.red,
             borderRadius: BorderRadius.circular(10.0),
-            textStyle: TextStyle(
-                fontSize: 16.0,
-                color: Colors.black
-            ),
+            textStyle: TextStyle(fontSize: 16.0, color: Colors.black),
             borderWidth: 2.0,
           ),
           ListView(
@@ -43,20 +55,20 @@ class _FlowersState extends State<Flowers> {
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: items.length,
+                  itemCount: flowerItems.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 20.0,
                     crossAxisSpacing: 20.0,
                   ),
                   itemBuilder: (context, index) => FlowerCard(
-                    item: items[index],
+                    Floweritem: flowerItems[index],
                     press: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
-                            item: items[index],
+                            Floweritem: flowerItems[index],
                           ),
                         ),
                       );
@@ -68,6 +80,7 @@ class _FlowersState extends State<Flowers> {
           ),
         ],
       ),
-    );;
+    );
+    ;
   }
 }

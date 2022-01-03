@@ -1,4 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+class FlowerItem {
+  String? image, title, description;
+  int? price, id;
+  String? color;
+  bool? isFavorite;
+
+  FlowerItem({
+    this.isFavorite,
+    this.price,
+    this.id,
+    this.color,
+    this.image,
+    this.title,
+    this.description,
+  });
+}
 
 class Item {
   final String image, title, description;
@@ -16,6 +34,39 @@ class Item {
     required this.title,
     required this.description,
   });
+}
+
+List<FlowerItem> flowerItems = [];
+
+class DatabaseManager {
+  Future getItemList() async {
+    final CollectionReference flowers =
+        FirebaseFirestore.instance.collection('flowers');
+    try {
+      flowerItems.clear();
+      var snapshot = await flowers.get();
+      snapshot.docs.forEach((element) {
+        Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
+        if (data != null) {
+          var itemEntity = FlowerItem();
+          itemEntity.title = data['title'];
+          itemEntity.isFavorite = data['isFavorite'];
+          itemEntity.price = data['price'];
+          itemEntity.image = data['image'];
+          itemEntity.description = data['description'];
+          itemEntity.id = data['id'];
+          itemEntity.color = data['color'];
+          flowerItems.add(itemEntity);
+        } else {
+          print("error:");
+        }
+      });
+      return flowerItems;
+    } catch (e) {
+      print("Error : ${e.toString()}");
+      return [];
+    }
+  }
 }
 
 List<Item> items = [

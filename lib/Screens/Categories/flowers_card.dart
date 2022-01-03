@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:fauna/Model/item.dart';
+
 // import 'package:fauna/Screens/details/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,21 +13,23 @@ const ktitleLabel = TextStyle(
 );
 
 class FlowerCard extends StatelessWidget {
-  final Item item;
+  final FlowerItem Floweritem;
   final VoidCallback press;
   const FlowerCard({
     Key? key,
-    required this.item,
+    required this.Floweritem,
     required this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color colorCode =
+        Colors.primaries[Random().nextInt(Colors.primaries.length)];
     return GestureDetector(
       onTap: press,
       child: Container(
         decoration: BoxDecoration(
-          color: item.color,
+          color: colorCode,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -36,11 +41,11 @@ class FlowerCard extends StatelessWidget {
               width: 160,
               height: 150,
               decoration: BoxDecoration(
-                color: item.color,
+                color: colorCode,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Image.asset(
-                item.image,
+              child: Image.network(
+                Floweritem.image.toString(),
                 width: 150,
                 height: 150,
                 fit: BoxFit.contain,
@@ -50,12 +55,12 @@ class FlowerCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20 / 4),
               child: Text(
                 // products is out demo list
-                item.title,
+                Floweritem.title.toString(),
                 style: ktitleLabel,
               ),
             ),
             Text(
-              "\$${item.price}",
+              "\$${Floweritem.price}",
               style: ktitleLabel,
             ),
           ],
