@@ -1,7 +1,7 @@
 import 'item.dart';
 
 class Cart {
-  final Item item;
+  final FlowerItem item;
   final int numOfItem;
 
   Cart({required this.item, required this.numOfItem});
@@ -9,7 +9,7 @@ class Cart {
 
 class getTotal {
   double get subTotal => demoCarts.fold(
-      0, (total, current) => total + (current.item.price * current.numOfItem));
+      0, (total, current) => total + (current.item.price! * current.numOfItem));
 
   String get subTotalString => subTotal.toString();
 

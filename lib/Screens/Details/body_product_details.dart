@@ -28,7 +28,7 @@ class BodyOfDetailScreen extends StatefulWidget {
 class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
   void addToCart() {
     print("Added");
-    // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
+    demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
     setState(() {
       txtQuntity = 1;
     });
@@ -36,7 +36,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
 
   void addToFavorite() {
     print("Added to the favorite");
-    // favoriteCart.add(FavoriteCart(item: widget.item));
+    favoriteCart.add(FavoriteCart(item: widget.flowerItem));
     setState(() {
       txtQuntity = 1;
     });

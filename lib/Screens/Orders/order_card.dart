@@ -29,7 +29,7 @@ class OrderCard extends StatelessWidget {
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Image.asset(cart.item.image),
+                child: Image.network(cart.item.image.toString()),
               ),
             ),
           ),
@@ -39,7 +39,7 @@ class OrderCard extends StatelessWidget {
           Column(
             children: [
               Text(
-                cart.item.title,
+                cart.item.title.toString(),
                 style: ktxtColor,
                 maxLines: 2,
               ),

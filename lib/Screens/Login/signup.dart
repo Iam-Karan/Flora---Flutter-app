@@ -48,6 +48,7 @@ class _SignupState extends State<Signup> {
     final authService = Provider.of<AuthService>(context);
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
     String error = "";
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -85,6 +86,7 @@ class _SignupState extends State<Signup> {
                           child: Column(
                             children: [
                               TextFormField(
+                                controller: nameController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "First Name",
@@ -131,7 +133,9 @@ class _SignupState extends State<Signup> {
                               dynamic result = await authService
                                   .createUserWithEmailAndPassword(
                                       email: emailController.text,
-                                      password: passwordController.text);
+                                      password: passwordController.text,
+                                      name: nameController.text,
+                                      allergie: false);
                               if (result == null) {
                                 setState(() {
                                   error =

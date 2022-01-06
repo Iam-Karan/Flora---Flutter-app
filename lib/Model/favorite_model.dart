@@ -1,7 +1,7 @@
 import 'item.dart';
 
 class FavoriteCart {
-  final Item item;
+  final FlowerItem item;
   FavoriteCart({required this.item});
 }
 

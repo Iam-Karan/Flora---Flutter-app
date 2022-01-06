@@ -18,6 +18,74 @@ class FlowerItem {
   });
 }
 
+class GiftItem {
+  String? title, image;
+  int? price;
+  GiftItem({this.title, this.price, this.image});
+}
+
+class GiftManager {
+  List<GiftItem> giftItems = [];
+  Future getGiftItemList() async {
+    final CollectionReference gifts =
+        FirebaseFirestore.instance.collection('Gifts');
+    try {
+      giftItems.clear();
+      var snapshot = await gifts.get();
+      snapshot.docs.forEach((element) {
+        Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
+        if (data != null) {
+          var gift = GiftItem();
+          gift.title = data['title'];
+          gift.price = data['price'];
+          gift.image = data['image'];
+          giftItems.add(gift);
+        } else {
+          print("error:");
+        }
+      });
+      return giftItems;
+    } catch (e) {
+      print("Error : ${e.toString()}");
+      return [];
+    }
+  }
+}
+
+class PerfumeItem {
+  String? title, image;
+  int? price;
+  PerfumeItem({this.title, this.price, this.image});
+}
+
+class PerfumeManager {
+  List<PerfumeItem> perfumeItems = [];
+  Future getPerfumeItemList() async {
+    final CollectionReference perfumes =
+        FirebaseFirestore.instance.collection('Perfumes');
+    try {
+      perfumeItems.clear();
+      var snapshot = await perfumes.get();
+      snapshot.docs.forEach((element) {
+        Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
+        if (data != null) {
+          var perfume = PerfumeItem();
+          perfume.title = data['title'];
+          perfume.price = data['price'];
+          perfume.image = data['image'];
+          perfumeItems.add(perfume);
+        } else {
+          print("error:");
+        }
+      });
+      return perfumeItems;
+    } catch (e) {
+      print("Error : ${e.toString()}");
+      return [];
+    }
+  }
+}
+
 class Item {
   final String image, title, description;
   final int price, size, id;

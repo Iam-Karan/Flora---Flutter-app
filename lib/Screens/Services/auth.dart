@@ -30,10 +30,11 @@ class AuthService {
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
     final userData = await FacebookAuth.instance.getUserData();
     String userEmail = userData['email'];
-    final credential = await _auth.signInWithCredential(facebookAuthCredential);
     print(userEmail.toString());
+    // UserAttributes userAttributes = UserAttributes(email: userEmail, );
 
-    return credential;
+    // await NewUser(uid: _accessToken!.userId).addUser('${userEmail}');
+    return await _auth.signInWithCredential(facebookAuthCredential);
   }
 
   //Login
@@ -46,14 +47,26 @@ class AuthService {
 
   //Register
   Future<UserAttributes?> createUserWithEmailAndPassword(
-      {required String email, required String password}) async {
-    final credential = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
-    final userEmail = credential.user?.email;
-    print('${userEmail}');
-    //Stores the data in the users collection
-    await NewUser(uid: credential.user!.uid).addUser('${userEmail}');
-    return _userFromFirebase(credential.user);
+      {required String email,
+      required String password,
+      required String name,
+      required bool allergie}) async {
+    try {
+      final credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      final userEmail = credential.user?.email;
+      print('${userEmail}');
+      //Stores the data in the users collection
+      await NewUser(uid: credential.user!.uid, name: name)
+          .addUser('${userEmail}', name, allergie);
+      return _userFromFirebase(credential.user);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    }
   }
 
   //Logout

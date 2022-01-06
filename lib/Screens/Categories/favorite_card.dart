@@ -41,7 +41,7 @@ class _FavroiteCardState extends State<FavroiteCard> {
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(widget.favorite.item.image),
+              child: Image.network(widget.favorite.item.image.toString()),
             ),
           ),
         ),
@@ -51,7 +51,7 @@ class _FavroiteCardState extends State<FavroiteCard> {
         Column(
           children: [
             Text(
-              widget.favorite.item.title,
+              widget.favorite.item.title.toString(),
               style: ktxtColor,
               maxLines: 2,
             ),

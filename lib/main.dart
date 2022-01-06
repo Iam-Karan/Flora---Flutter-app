@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:fauna/Screens/Categories/gifts.dart';
 import 'package:fauna/Screens/Details/shipping_details.dart';
+import 'package:fauna/Screens/Details/user_details.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
           '/shipping': (context) => Shipping(),
           '/order': (context) => Order(),
           '/customflower': (context) => CustomFlower(),
+          '/userdetails': (context) => UserDetails(),
         },
       ),
     );
