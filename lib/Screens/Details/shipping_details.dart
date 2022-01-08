@@ -1,9 +1,14 @@
+import 'package:fauna/Model/item.dart';
+import 'package:fauna/Model/order.dart';
 import 'package:fauna/Screens/Orders/gift_pack.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fauna/Model/cart.dart';
+
+import 'body_product_details.dart';
 
 bool checkWrap = false;
 
@@ -16,13 +21,31 @@ const kbuttonLabel = TextStyle(
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
 class Shipping extends StatefulWidget {
-  const Shipping({Key? key}) : super(key: key);
+  final FlowerItem flowerItem;
+  const Shipping({Key? key, required this.flowerItem}) : super(key: key);
 
   @override
   _ShippingState createState() => _ShippingState();
 }
 
 class _ShippingState extends State<Shipping> {
+  void addToOrderCart() {
+    print("Added");
+    Fluttertoast.showToast(
+        msg: "Product has been added",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    orderCarts.add(Order(item: widget.flowerItem, numOfItem: txtQuntity));
+    demoCarts.clear();
+    setState(() {
+      txtQuntity = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

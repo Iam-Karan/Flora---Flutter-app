@@ -3,6 +3,7 @@ import 'package:fauna/Model/item.dart';
 import 'package:fauna/Model/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color bgcolor = Colors.white;
@@ -28,6 +29,14 @@ class BodyOfDetailScreen extends StatefulWidget {
 class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
   void addToCart() {
     print("Added");
+    Fluttertoast.showToast(
+        msg: "Product has been added",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
     demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
     setState(() {
       txtQuntity = 1;
@@ -115,7 +124,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
                                 if (bgcolor == Colors.white) {
                                   bgcolor = Colors.red;
                                   addToFavorite();
-                                } else {
+                                } else if (bgcolor == Colors.red) {
                                   bgcolor = Colors.white;
                                   removeFromFavorite();
                                 }

@@ -84,6 +84,14 @@ class _DraWerState extends State<DraWer> {
                   IconButton(
                     onPressed: () async {
                       await authService.signOut();
+                      Fluttertoast.showToast(
+                          msg: "Log out",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
                       Navigator.pushNamed(context, '/home');
                     },
                     icon: Icon(
