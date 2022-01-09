@@ -1,3 +1,4 @@
+import 'package:fauna/Model/cart.dart';
 import 'package:fauna/Screens/Orders/body_order.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,6 +45,29 @@ class _OrderState extends State<Order> {
         centerTitle: true,
       ),
       body: BodyOrder(),
+      bottomNavigationBar: Container(
+        height: 100,
+        child: Stack(
+          children: [
+            Positioned(
+              child: MaterialButton(
+                color: Colors.red,
+                minWidth: double.infinity,
+                height: 50,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                  demoCarts.clear();
+                  setState(() {});
+                },
+                child: Text(
+                  "Return to main menu",
+                  style: kbuttonLabel,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

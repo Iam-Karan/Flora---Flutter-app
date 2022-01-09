@@ -21,31 +21,15 @@ const kbuttonLabel = TextStyle(
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
 class Shipping extends StatefulWidget {
-  final FlowerItem flowerItem;
-  const Shipping({Key? key, required this.flowerItem}) : super(key: key);
+  const Shipping({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _ShippingState createState() => _ShippingState();
 }
 
 class _ShippingState extends State<Shipping> {
-  void addToOrderCart() {
-    print("Added");
-    Fluttertoast.showToast(
-        msg: "Product has been added",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-    orderCarts.add(Order(item: widget.flowerItem, numOfItem: txtQuntity));
-    demoCarts.clear();
-    setState(() {
-      txtQuntity = 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,6 +216,10 @@ class _ShippingState extends State<Shipping> {
                               );
                             } else {
                               Navigator.pushNamed(context, '/order');
+                              // List OrderCart = new List<Cart>.from(demoCarts);
+                              // print("OrderCart${OrderCart}");
+                              // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
+
                             }
                           },
                           child: Text(

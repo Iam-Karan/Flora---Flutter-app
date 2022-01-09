@@ -1,4 +1,5 @@
 import 'package:fauna/Model/cart.dart';
+import 'package:fauna/Model/order.dart';
 import 'package:fauna/Screens/Orders/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,17 +20,17 @@ class _BodyOrderState extends State<BodyOrder> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: ListView.builder(
-          itemCount: demoCarts.length,
+          itemCount: OrderCart.length,
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Dismissible(
               direction: DismissDirection.endToStart,
               onDismissed: (direction) {
                 setState(() {
-                  demoCarts.removeAt(index);
+                  OrderCart.removeAt(index);
                 });
               },
-              key: Key(demoCarts[index].item.id.toString()),
+              key: Key(OrderCart[index].item.id.toString()),
               background: Container(
                 color: Colors.red,
                 child: Row(
@@ -40,7 +41,7 @@ class _BodyOrderState extends State<BodyOrder> {
                 ),
               ),
               child: OrderCard(
-                cart: demoCarts[index],
+                cart: OrderCart[index],
               ),
             ),
           ),

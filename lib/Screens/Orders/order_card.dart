@@ -9,8 +9,9 @@ const ktxtColor = TextStyle(
 );
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({Key? key, required this.cart}) : super(key: key);
   final Cart cart;
+  const OrderCard({Key? key, required this.cart}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

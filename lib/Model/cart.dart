@@ -2,6 +2,7 @@ import 'item.dart';
 
 class Cart {
   final FlowerItem item;
+
   final int numOfItem;
 
   Cart({required this.item, required this.numOfItem});
@@ -28,3 +29,4 @@ class getTotal {
 // Demo data for our cart
 
 List<Cart> demoCarts = [];
+List OrderCart = List<Cart>.from(demoCarts);
