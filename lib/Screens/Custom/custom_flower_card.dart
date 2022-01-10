@@ -23,7 +23,7 @@ class CustomFlowerCard extends StatefulWidget {
 class _CustomFlowerCardState extends State<CustomFlowerCard> {
   void addTocart() {
     print("Added to basket");
-    // demoCarts.add(Cart(item: widget.favorite.item, numOfItem: txtQuntity));
+    // demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
   }
 
   @override
