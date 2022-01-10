@@ -58,9 +58,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
         ),
-        initialRoute: '/',
+        // initialRoute: '/',
+        home: Welcome(),
         routes: {
-          '/': (context) => Welcome(),
+          // '/': (context) => Welcome(),
           '/wrapper': (context) => Wrapper(),
           '/login': (context) => Login(),
           '/signup': (context) => Signup(),

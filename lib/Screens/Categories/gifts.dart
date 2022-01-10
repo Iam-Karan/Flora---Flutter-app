@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fauna/Model/cart.dart';
 import 'package:fauna/Model/item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_search_bar/outline_search_bar.dart';
-import 'gift_card.dart';
+import 'favorite_card.dart';
 
 const kTextLabel = TextStyle(
   color: Colors.black,
@@ -13,7 +15,9 @@ const kTextLabel = TextStyle(
 );
 
 class Gifts extends StatefulWidget {
-  const Gifts({Key? key}) : super(key: key);
+  const Gifts({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _GiftsState createState() => _GiftsState();
@@ -21,7 +25,9 @@ class Gifts extends StatefulWidget {
 
 class _GiftsState extends State<Gifts> {
   List<GiftItem> giftItems = [];
+
   List<PerfumeItem> perfumeItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +56,23 @@ class _GiftsState extends State<Gifts> {
       });
     }
     print('${perfumeItems.length}');
+  }
+
+  void addToCart() {
+    print("Added");
+    Fluttertoast.showToast(
+        msg: "Product has been added",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    // demoCarts.add(Cart(item: widget._giftItem, numOfItem: txtQuntity));
+
+    setState(() {
+      txtQuntity = 1;
+    });
   }
 
   @override
@@ -173,10 +196,15 @@ class _GiftsState extends State<Gifts> {
                                       BorderRadius.all(Radius.circular(5.0)),
                                   child: Stack(
                                     children: <Widget>[
-                                      Image.network(
-                                        item.image.toString(),
-                                        fit: BoxFit.fitWidth,
-                                        width: 1000.0,
+                                      GestureDetector(
+                                        onTap: () {
+                                          addToCart();
+                                        },
+                                        child: Image.network(
+                                          item.image.toString(),
+                                          fit: BoxFit.fitWidth,
+                                          width: 1000.0,
+                                        ),
                                       ),
                                       Positioned(
                                         bottom: 0.0,
@@ -224,20 +252,6 @@ class _GiftsState extends State<Gifts> {
                           ))
                       .toList(),
                 ),
-                // child: GridView.builder(
-                //   shrinkWrap: true,
-                //   physics: NeverScrollableScrollPhysics(),
-                //   itemCount: items.length,
-                //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     mainAxisSpacing: 20.0,
-                //     crossAxisSpacing: 20.0,
-                //   ),
-                //   itemBuilder: (context, index) => ItemCard(
-                //     item: items[index],
-                //     press: () {},
-                //   ),
-                // ),
               ),
             ],
           ),
@@ -246,39 +260,3 @@ class _GiftsState extends State<Gifts> {
     );
   }
 }
-
-// final List<String> imgList = [];
-//
-// final List<Widget> imageSliders = giftItems
-//     .map((item) => Container(
-//           child: Container(
-//             margin: EdgeInsets.all(5.0),
-//             child: ClipRRect(
-//                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                 child: Stack(
-//                   children: <Widget>[
-//                     Image.network(item.image.toString(),
-//                         fit: BoxFit.cover, width: 1000.0),
-//                     Positioned(
-//                       bottom: 0.0,
-//                       left: 0.0,
-//                       right: 0.0,
-//                       child: Container(
-//                         decoration: BoxDecoration(
-//                           gradient: LinearGradient(
-//                             colors: [
-//                               Color.fromARGB(200, 241, 12, 12),
-//                               Color.fromARGB(0, 23, 20, 20)
-//                             ],
-//                             begin: Alignment.bottomCenter,
-//                             end: Alignment.topCenter,
-//                           ),
-//                         ),
-//                         child: Text(item.title.toString()),
-//                       ),
-//                     ),
-//                   ],
-//                 )),
-//           ),
-//         ))
-//     .toList();

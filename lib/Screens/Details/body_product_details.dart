@@ -38,6 +38,7 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
         textColor: Colors.white,
         fontSize: 16.0);
     demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
+
     setState(() {
       txtQuntity = 1;
     });

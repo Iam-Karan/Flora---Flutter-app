@@ -85,9 +85,6 @@ class _CartScreenState extends State<CartScreen> {
                 height: 50,
                 onPressed: () {
                   Navigator.pushNamed(context, '/shipping');
-                  setState(() {
-                    //  demoCarts.clear();
-                  });
                 },
                 child: Text(
                   "Checkout",

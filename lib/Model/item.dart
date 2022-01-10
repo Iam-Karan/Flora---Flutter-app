@@ -63,9 +63,11 @@ class PerfumeManager {
   Future getPerfumeItemList() async {
     final CollectionReference perfumes =
         FirebaseFirestore.instance.collection('Perfumes');
+
     try {
       perfumeItems.clear();
       var snapshot = await perfumes.get();
+      print("Perfume =>  ${snapshot}");
       snapshot.docs.forEach((element) {
         Map<String, dynamic>? data = element.data() as Map<String, dynamic>?;
         if (data != null) {
