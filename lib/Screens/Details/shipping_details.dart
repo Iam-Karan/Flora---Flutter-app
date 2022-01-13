@@ -18,7 +18,6 @@ const kbuttonLabel = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Ubuntu',
 );
-GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
 class Shipping extends StatefulWidget {
   const Shipping({
@@ -32,6 +31,7 @@ class Shipping extends StatefulWidget {
 class _ShippingState extends State<Shipping> {
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formkey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -219,7 +219,9 @@ class _ShippingState extends State<Shipping> {
                               // List OrderCart = new List<Cart>.from(demoCarts);
                               // print("OrderCart${OrderCart}");
                               // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
-
+                              setState(() {
+                                // demoCarts.clear();
+                              });
                             }
                           },
                           child: Text(

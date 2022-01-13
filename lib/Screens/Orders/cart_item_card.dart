@@ -26,7 +26,7 @@ class CartItemCard extends StatelessWidget {
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.network(cart.item!.image.toString()),
+              child: Image.network(cart.item.image.toString()),
             ),
           ),
         ),
@@ -36,14 +36,14 @@ class CartItemCard extends StatelessWidget {
         Column(
           children: [
             Text(
-              cart.item!.title.toString(),
+              cart.item.title.toString(),
               style: ktxtColor,
               maxLines: 2,
             ),
             SizedBox(height: 10),
             Text.rich(
               TextSpan(
-                text: "\$${cart.item?.price}",
+                text: "\$${cart.item.price}",
                 style: ktxtColor,
                 children: [
                   TextSpan(

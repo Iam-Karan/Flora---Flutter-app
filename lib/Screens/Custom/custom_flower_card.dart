@@ -14,8 +14,9 @@ const ktxtColor = TextStyle(
 var txtQuntity = 1;
 
 class CustomFlowerCard extends StatefulWidget {
+  final FlowerItem item;
   const CustomFlowerCard({Key? key, required this.item}) : super(key: key);
-  final Item item;
+
   @override
   _CustomFlowerCardState createState() => _CustomFlowerCardState();
 }
@@ -23,7 +24,7 @@ class CustomFlowerCard extends StatefulWidget {
 class _CustomFlowerCardState extends State<CustomFlowerCard> {
   void addTocart() {
     print("Added to basket");
-    // demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
+    demoCarts.add(Cart(item: widget.item, numOfItem: txtQuntity));
   }
 
   @override
@@ -41,7 +42,7 @@ class _CustomFlowerCardState extends State<CustomFlowerCard> {
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(widget.item.image),
+              child: Image.network(widget.item.image.toString()),
             ),
           ),
         ),
@@ -51,7 +52,7 @@ class _CustomFlowerCardState extends State<CustomFlowerCard> {
         Column(
           children: [
             Text(
-              widget.item.title,
+              widget.item.title.toString(),
               style: ktxtColor,
               maxLines: 2,
             ),
@@ -72,7 +73,6 @@ class _CustomFlowerCardState extends State<CustomFlowerCard> {
                       if (txtQuntity > 1) {
                         txtQuntity--;
                       }
-                      ;
                     });
                   },
                   elevation: 2.0,

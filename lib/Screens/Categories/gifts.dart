@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_search_bar/outline_search_bar.dart';
 import 'favorite_card.dart';
+import 'gift_card.dart';
 
 const kTextLabel = TextStyle(
   color: Colors.black,
@@ -60,14 +61,14 @@ class _GiftsState extends State<Gifts> {
 
   void addToCart() {
     print("Added");
-    Fluttertoast.showToast(
-        msg: "Product has been added",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
+    // Fluttertoast.showToast(
+    //     msg: "Product has been added",
+    //     toastLength: Toast.LENGTH_LONG,
+    //     gravity: ToastGravity.BOTTOM,
+    //     timeInSecForIosWeb: 1,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 16.0);
     // demoCarts.add(Cart(item: widget._giftItem, numOfItem: txtQuntity));
 
     setState(() {

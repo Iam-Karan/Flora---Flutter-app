@@ -30,7 +30,7 @@ class _CustomFlowerState extends State<CustomFlower> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: ListView.builder(
-            itemCount: items.length,
+            itemCount: flowerItems.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Dismissible(
@@ -51,7 +51,7 @@ class _CustomFlowerState extends State<CustomFlower> {
                   ),
                 ),
                 child: CustomFlowerCard(
-                  item: items[index],
+                  item: flowerItems[index],
                 ),
               ),
             ),

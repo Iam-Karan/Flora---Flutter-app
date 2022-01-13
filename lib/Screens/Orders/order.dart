@@ -56,8 +56,9 @@ class _OrderState extends State<Order> {
                 height: 50,
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
-                  demoCarts.clear();
-                  setState(() {});
+                  setState(() {
+                    demoCarts.clear();
+                  });
                 },
                 child: Text(
                   "Return to main menu",

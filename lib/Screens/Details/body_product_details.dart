@@ -45,7 +45,15 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
   }
 
   void addToFavorite() {
-    print("Added to the favorite");
+    print("");
+    Fluttertoast.showToast(
+        msg: "Added to the favorite",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
     favoriteCart.add(FavoriteCart(item: widget.flowerItem));
     setState(() {
       txtQuntity = 1;
