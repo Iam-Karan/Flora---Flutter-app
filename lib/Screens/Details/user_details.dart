@@ -1,10 +1,9 @@
 import 'package:fauna/Model/addUser.dart';
-import 'package:fauna/Model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 const kbuttonLabel = TextStyle(
@@ -137,7 +136,7 @@ class _UserDetailsState extends State<UserDetails> {
                                 },
                                 items: allergie.map((location) {
                                   return DropdownMenuItem<bool>(
-                                    child: Text('${allergie}'),
+                                    child: Text('${location}'),
                                     value: location,
                                   );
                                 }).toList(),
@@ -161,6 +160,12 @@ class _UserDetailsState extends State<UserDetails> {
                               _selectedAllergie!,
                             );
                             Navigator.pop(context);
+                            Fluttertoast.showToast(
+                                msg: "Data updated Successfully!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 2
+                            );
                           } else {
                             print("Not validated");
                           }

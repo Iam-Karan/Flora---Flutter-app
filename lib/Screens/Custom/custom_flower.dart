@@ -13,6 +13,30 @@ class CustomFlower extends StatefulWidget {
 }
 
 class _CustomFlowerState extends State<CustomFlower> {
+  List<FlowerItem> flowerItems = [];
+  List<FlowerItem> finalflowerItems = [];
+  @override
+  void initState() {
+    super.initState();
+    fetchFlowersData();
+  }
+
+  fetchFlowersData() async {
+    dynamic result = await DatabaseManager().getItemList();
+    if (result == null) {
+      print("flower list null");
+    } else {
+      setState(() {
+        finalflowerItems = result;
+        for(var i = 0; i< finalflowerItems.length; i++){
+          if(finalflowerItems[i].type == "flower"){
+            flowerItems.add(finalflowerItems[i]);
+          }
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

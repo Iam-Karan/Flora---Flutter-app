@@ -15,6 +15,7 @@ class Flowers extends StatefulWidget {
 
 class _FlowersState extends State<Flowers> {
   List<FlowerItem> flowerItems = [];
+  List<FlowerItem> finalflowerItems = [];
   @override
   void initState() {
     super.initState();
@@ -27,7 +28,12 @@ class _FlowersState extends State<Flowers> {
       print("flower list null");
     } else {
       setState(() {
-        flowerItems = result;
+        finalflowerItems = result;
+        for(var i = 0; i< finalflowerItems.length; i++){
+          if(finalflowerItems[i].type == "bouquet"){
+              flowerItems.add(finalflowerItems[i]);
+          }
+        }
       });
     }
   }

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FlowerItem {
-  String? image, title, description;
+  String? image, title, description, type;
   int? price, id;
   String? color;
   bool? isFavorite;
@@ -15,6 +15,7 @@ class FlowerItem {
     this.image,
     this.title,
     this.description,
+    this.type
   });
 }
 
@@ -126,6 +127,7 @@ class DatabaseManager {
           itemEntity.description = data['description'];
           itemEntity.id = data['id'];
           itemEntity.color = data['color'];
+          itemEntity.type = data['type'];
           flowerItems.add(itemEntity);
         } else {
           print("error:");

@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_search_bar/outline_search_bar.dart';
 import 'favorite_card.dart';
 import 'gift_card.dart';
+import 'flowers_card.dart';
+import 'package:fauna/Screens/Details/product_details.dart';
 
 const kTextLabel = TextStyle(
   color: Colors.black,
@@ -28,12 +30,14 @@ class _GiftsState extends State<Gifts> {
   List<GiftItem> giftItems = [];
 
   List<PerfumeItem> perfumeItems = [];
-
+  List<FlowerItem> flowerItems = [];
+  List<FlowerItem> finalflowerItems = [];
   @override
   void initState() {
     super.initState();
     fetchPerfumeData();
     fetchGiftData();
+    fetchFlowersData();
   }
 
   fetchGiftData() async {
@@ -57,6 +61,21 @@ class _GiftsState extends State<Gifts> {
       });
     }
     print('${perfumeItems.length}');
+  }
+  fetchFlowersData() async {
+    dynamic result = await DatabaseManager().getItemList();
+    if (result == null) {
+      print("flower list null");
+    } else {
+      setState(() {
+        finalflowerItems = result;
+        for(var i = 0; i< finalflowerItems.length; i++){
+          if(finalflowerItems[i].type == "gift"){
+            flowerItems.add(finalflowerItems[i]);
+          }
+        }
+      });
+    }
   }
 
   void addToCart() {
@@ -254,6 +273,38 @@ class _GiftsState extends State<Gifts> {
                       .toList(),
                 ),
               ),
+            ],
+          ),
+          ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: flowerItems.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 20.0,
+                    crossAxisSpacing: 20.0,
+                  ),
+                  itemBuilder: (context, index) => FlowerCard(
+                    Floweritem: flowerItems[index],
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            Floweritem: flowerItems[index],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
             ],
           ),
         ],
