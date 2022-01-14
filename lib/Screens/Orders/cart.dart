@@ -3,6 +3,7 @@ import 'package:fauna/Screens/Orders/body_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fauna/Model/cart.dart';
+import 'package:fauna/Screens/Details/shipping_details.dart';
 
 const kbuttonLabel = TextStyle(
   color: Colors.white,
@@ -84,7 +85,7 @@ class _CartScreenState extends State<CartScreen> {
                 minWidth: double.infinity,
                 height: 50,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/shipping');
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Shipping( productList: demoCarts,)));
                 },
                 child: Text(
                   "Checkout",

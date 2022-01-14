@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fauna/Model/item.dart';
 import 'package:fauna/Model/order.dart';
 import 'package:fauna/Screens/Orders/gift_pack.dart';
@@ -7,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fauna/Model/cart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'body_product_details.dart';
 
@@ -20,15 +24,53 @@ const kbuttonLabel = TextStyle(
 );
 
 class Shipping extends StatefulWidget {
-  const Shipping({
-    Key? key,
-  }) : super(key: key);
+  const Shipping({Key? key, required this.productList}) : super(key: key);
 
+  final List<Cart> productList;
   @override
   _ShippingState createState() => _ShippingState();
 }
 
 class _ShippingState extends State<Shipping> {
+  final firestoreInstance = FirebaseFirestore.instance;
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  final TextEditingController line = TextEditingController();
+  final TextEditingController city = TextEditingController();
+  final TextEditingController state = TextEditingController();
+  final TextEditingController country = TextEditingController();
+  final TextEditingController zipcode = TextEditingController();
+  void _setData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+
+    List productIds = [];
+    List numOfProducts = [];
+
+    for(var i =0; i < widget.productList.length; i++){
+      productIds.add(widget.productList[i].item.id);
+      numOfProducts.add(widget.productList[i].numOfItem);
+    }
+
+    Map<String, List> products ={
+      "items" : productIds,
+      "numofItems" : numOfProducts
+    };
+
+    firestoreInstance.collection("orders").add({
+      "userid": uid,
+      "name": "${firstName.text} ${lastName.text}",
+      "address": "${line.text}, ${city.text}, ${state.text}, ${country.text}, ${zipcode.text}",
+      "wrap": checkWrap,
+      "products" : products
+
+    }).then((_) {
+      print("success!");
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -60,6 +102,7 @@ class _ShippingState extends State<Shipping> {
                           child: Column(
                             children: [
                               TextFormField(
+                                controller: firstName,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "First Name",
@@ -71,6 +114,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: lastName,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Last Name",
@@ -82,6 +126,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: line,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Address Line 1",
@@ -92,6 +137,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: city,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "City",
@@ -103,6 +149,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: zipcode,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Zip code",
@@ -114,6 +161,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: state,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "State",
@@ -125,6 +173,7 @@ class _ShippingState extends State<Shipping> {
                               ),
                               SizedBox(height: 20.0),
                               TextFormField(
+                                controller: country,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Country",
@@ -207,22 +256,35 @@ class _ShippingState extends State<Shipping> {
                           minWidth: double.infinity,
                           height: 50,
                           onPressed: () {
-                            if (checkWrap == true) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GiftPack(),
-                                ),
-                              );
-                            } else {
-                              Navigator.pushNamed(context, '/order');
-                              // List OrderCart = new List<Cart>.from(demoCarts);
-                              // print("OrderCart${OrderCart}");
-                              // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
-                              setState(() {
-                                // demoCarts.clear();
-                              });
+                            if(firstName.text.isNotEmpty && lastName.text.isNotEmpty && line.text.isNotEmpty && city.text.isNotEmpty && zipcode.text.isNotEmpty && state.text.isNotEmpty && country.text.isNotEmpty){
+                              _setData();
+                              if (checkWrap == true) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GiftPack(),
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushNamed(context, '/order');
+                                // List OrderCart = new List<Cart>.from(demoCarts);
+                                // print("OrderCart${OrderCart}");
+                                // demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
+                                setState(() {
+                                  // demoCarts.clear();
+                                });
+                              }
+                            }else{
+                              Fluttertoast.showToast(
+                                  msg: "All field must be fill!",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
                             }
+
                           },
                           child: Text(
                             "Order",

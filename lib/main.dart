@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
           '/flower': (context) => Flowers(),
           '/favorite': (context) => Favorite(),
           '/cart': (context) => CartScreen(),
-          '/shipping': (context) => Shipping(),
+    //      '/shipping': (context) => Shipping(),
           '/order': (context) => Order(),
           '/customflower': (context) => CustomFlower(),
           '/userdetails': (context) => UserDetails(),

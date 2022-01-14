@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fauna/Model/favorite_model.dart';
 import 'package:fauna/Model/item.dart';
 import 'package:fauna/Model/cart.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Color bgcolor = Colors.white;
 var txtQuntity = 1;
@@ -27,7 +29,11 @@ class BodyOfDetailScreen extends StatefulWidget {
 }
 
 class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
+  final firestoreInstance = FirebaseFirestore.instance;
   void addToCart() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
     print("Added");
     Fluttertoast.showToast(
         msg: "Product has been added",
@@ -39,12 +45,23 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
         fontSize: 16.0);
     demoCarts.add(Cart(item: widget.flowerItem, numOfItem: txtQuntity));
 
+    firestoreInstance.collection("Cart").add({
+      "userid": uid,
+      "productId" : widget.flowerItem.id,
+      "numOfItem" : txtQuntity
+    }).then((_) {
+      print("success!");
+    });
+
     setState(() {
       txtQuntity = 1;
     });
   }
 
   void addToFavorite() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
     print("");
     Fluttertoast.showToast(
         msg: "Added to the favorite",
@@ -54,13 +71,19 @@ class _BodyOfDetailScreenState extends State<BodyOfDetailScreen> {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
+    firestoreInstance.collection("favourite").add({
+      "userid": uid,
+      "productId" : widget.flowerItem.id,
+    }).then((_) {
+      print("success!");
+    });
     favoriteCart.add(FavoriteCart(item: widget.flowerItem));
     setState(() {
       txtQuntity = 1;
     });
   }
 
-  void removeFromFavorite() {
+  void removeFromFavorite() async{
     print("Removed from the favorite");
     favoriteCart.removeAt(0);
   }
